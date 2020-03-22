@@ -1,0 +1,57 @@
+:root {
+  --blue: #2f74b5;
+  --blue2: #36739c;
+  --gray: #f2f2f2;
+  --gray2: #b4b4b4;
+  font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+table.month {
+  width: 100%;
+  border-spacing: 0;
+}
+
+th {
+  text-align: center;
+  background-color: var(--blue);
+  color: white;
+  width: calc(100% / 7);
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.outOfMonth {
+  color: var(--gray2);
+}
+
+tr:first-of-type .day {
+  border-top: 1px solid gray;
+}
+.day:first-of-type {
+  border-left: 1px solid gray;
+}
+/* sundays and saturdays */
+.day:first-of-type, .day:last-of-type {
+  background-color: var(--gray);
+  color: var(--blue2);
+}
+.day {
+  font-size: 0.9rem;
+  vertical-align: top;
+  font-weight: bold;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  height: 15vh;
+}
+
+.day .number {
+  display: block;
+  text-align: right;
+  width: 2vw;
+  padding: 3px;
+  margin-top: 5px;
+}
+
+.day.today {
+  background-color: #7ab1e4;
+}
