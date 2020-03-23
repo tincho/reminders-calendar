@@ -8,11 +8,21 @@ const Calendar = ({ month, nextMonth, prevMonth }) => {
   const monthNumber = month.getMonth()
   const monthName = month.toLocaleDateString('es', { month: 'long' })
 
-  const title = <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-    <button onClick={() => prevMonth(month)}>Prev</button>
-    <span style={{textTransform: 'capitalize' }}>{`${monthName} ${year}`}</span>
-    <button onClick={() => nextMonth(month)}>Next</button>
-  </div>
+  const title = (
+    <header style={{ display: 'flex', justifyContent: 'space-between'}}>
+      <button
+        className="navigate prevMonth"
+        onClick={() => prevMonth(month)}>
+          &laquo;
+      </button>
+      <h1 style={{textTransform: 'capitalize' }}>{`${monthName} ${year}`}</h1>
+      <button
+        className="navigate nextMonth"
+        onClick={() => nextMonth(month)}>
+          &raquo;
+      </button>
+    </header>
+  )
 
   return (
     <div id="container">
