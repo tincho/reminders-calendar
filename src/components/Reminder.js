@@ -5,8 +5,9 @@ import { daysBetween } from '@/util/dates'
 import { getWeather } from '@/util/weather'
 
 const locale = navigator.language || navigator.userLanguage || 'en'
+const noop = () => {}
 
-const Reminder = ({ reminder, addReminder, editReminder }) => {
+const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
   const [newReminder, setNewReminder] = React.useState(reminder)
   const [weather, setWeather] = React.useState()
 
@@ -32,6 +33,7 @@ const Reminder = ({ reminder, addReminder, editReminder }) => {
       date: reminder.date,
       reminder: newReminder
     })
+    onSave()
   }
 
   const setReminderValue = value => evt => setNewReminder({ ...newReminder, [value]: evt.target.value })
@@ -41,7 +43,10 @@ const Reminder = ({ reminder, addReminder, editReminder }) => {
       <legend>
         {new Date(reminder.date).toLocaleString(locale, { weekday: 'long', month: 'long', day: 'numeric' })}
       </legend>
-      {weather ? `Temp: ${weather.temp}°${weather.tempUnit} - ${weather.condition}` : ''}
+      <small className="weather">
+        {weather ? `Temp: ${weather.temp}°${weather.tempUnit} - ${weather.condition}` : ''}
+      </small>
+      <hr />
       <label htmlFor="">
         text
         <input id="" type="text" value={newReminder.text} onChange={setReminderValue('text')} />
