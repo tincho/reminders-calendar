@@ -84,3 +84,22 @@ tr:first-of-type .day {
 form.reminder label, form.reminder input {
   display: block;
 }
+
+form.reminder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
+form.reminder .weather {
+  border-radius: 3px;
+  padding: 10px;  
+  position: absolute;
+  top: 0;
+  right: 2vw;
+}
+form.reminder .weather.loaded {
+  border: 1px solid gray;
+}

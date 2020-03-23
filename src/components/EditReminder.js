@@ -30,6 +30,7 @@ const EditReminder = ({ reminder, remove }) => {
         &times;
       </button>
       <Modal
+        ariaHideApp={false}
         isOpen={open}
         onRequestClose={closeModal}
         contentLabel="Minimal Modal Example"

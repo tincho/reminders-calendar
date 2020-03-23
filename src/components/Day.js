@@ -23,6 +23,7 @@ const Day = ({ date, outOfMonth, reminders, cleanReminders }) => {
       <button title="Add Reminder" className="addReminder" onClick={openModal}>+</button>
       {reminders.length > 1 && <button title="Remove ALL" className="cleanReminders" onClick={() => cleanReminders(date)}>&times;</button>}
       <Modal
+        ariaHideApp={false}
         isOpen={open}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={true}>
