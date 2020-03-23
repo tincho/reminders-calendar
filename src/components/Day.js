@@ -21,7 +21,13 @@ const Day = ({ date, outOfMonth, reminders, cleanReminders }) => {
       <span className="number">{date.getDate()}</span>
       {reminders.map(reminder => <EditReminder reminder={reminder} key={reminder.id} />)}
       <button title="Add Reminder" className="addReminder" onClick={openModal}>+</button>
-      {reminders.length > 1 && <button title="Remove ALL" className="cleanReminders" onClick={() => cleanReminders(date)}>&times;</button>}
+      {reminders.length > 1 && <button title="Remove ALL" className="cleanReminders" onClick={() => {
+        if (window.confirm) {
+          const sure = window.confirm('Remove all reminders for this day. Are you sure?')
+          if (!sure) return
+        }
+        cleanReminders(date)
+      }}>&times;</button>}
       <Modal
         ariaHideApp={false}
         isOpen={open}
