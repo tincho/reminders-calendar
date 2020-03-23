@@ -50,7 +50,7 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
   const validate = () => {
     const err = []
     try {
-      if (!newReminder.text) {
+      if (!newReminder.text || newReminder.text.length > 30) {
         err.push('Invalid text')
       }
       if (newReminder.time && newReminder.time.length) {

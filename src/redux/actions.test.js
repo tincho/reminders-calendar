@@ -55,4 +55,21 @@ describe('actions creators and reducers', () => {
     })
     store.dispatch(action)
   })
+
+  it('max text length 30 chars', () => {
+    const add = addReminder({
+      date: new Date(),
+      reminder: {
+        text: 'confinement, day 5: still have plenty of food. zombies have not arrived yet'
+      }
+    })
+    expect(add.reminder.text).toBe('confinement, day 5: still have')
+
+    const edit = editReminder({
+      reminder: {
+        text: 'confinement, day 6: ran out of food'
+      }
+    })
+    expect(edit.reminder.text).toBe('confinement, day 6: ran out of')
+  })
 })
