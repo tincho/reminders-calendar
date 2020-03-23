@@ -1,15 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addReminder, editReminder } from '@/redux/actions'
+import { daysBetween } from '@/util/dates'
+import { getWeather } from '@/util/weather'
 
 const locale = navigator.language || navigator.userLanguage || 'en'
 
 const Reminder = ({ reminder, addReminder, editReminder }) => {
   const [newReminder, setNewReminder] = React.useState(reminder)
+  const [weather, setWeather] = React.useState()
+
+  const editing = reminder.id
+
+  React.useEffect(() => {
+    const distance = daysBetween(new Date(reminder.date))
+    if (distance < 0) {
+      return
+    }
+    if (!editing || !reminder.city) {
+      return
+    }
+    getWeather(reminder.city, reminder.date).then(forecast => {
+      setWeather(forecast)
+    })
+  })
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const action = reminder.id ? editReminder : addReminder
+    const action = editing ? editReminder : addReminder
     action({
       date: reminder.date,
       reminder: newReminder
@@ -20,7 +38,10 @@ const Reminder = ({ reminder, addReminder, editReminder }) => {
 
   return (
     <form onSubmit={onSubmit} action="#">
-      {new Date(reminder.date).toLocaleString(locale, { weekday: 'long', month: 'long', day: 'numeric' })}
+      <legend>
+        {new Date(reminder.date).toLocaleString(locale, { weekday: 'long', month: 'long', day: 'numeric' })}
+      </legend>
+      {weather ? `Temp: ${weather.temp}°${weather.tempUnit} - ${weather.condition}` : ''}
       <label htmlFor="">
         text
         <input id="" type="text" value={newReminder.text} onChange={setReminderValue('text')} />

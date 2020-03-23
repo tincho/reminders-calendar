@@ -62,3 +62,10 @@ export const isToday = date =>
   date.getDate() === today.getDate()
   && date.getMonth() === today.getMonth()
   && date.getFullYear() === today.getFullYear()
+
+export const daysBetween = (date1, date2 = new Date()) => {
+  const oneDayMs = 1000*60*60*24
+  date1.setHours(0, 0, 0, 0)
+  date2.setHours(0, 0, 0, 0)
+  return Math.ceil( (date1.getTime() - date2.getTime()) / oneDayMs )
+}
