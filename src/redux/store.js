@@ -4,22 +4,7 @@ import rootReducer from './calendarReducer'
 
 const initialState = {
   month: new Date(),
-  events: {
-    2020: {
-      2: {
-        1: [{
-          time: '20:00',
-          text: 'hello',
-          city: {
-            code: 'MDQ',
-            name: 'Mar del Plata',
-            latLng: []
-          },
-          color: '#0f0f0f'
-        }]
-      }
-    }
-  }
+  reminders: {}
 }
 
 const store = createStore(rootReducer, initialState)

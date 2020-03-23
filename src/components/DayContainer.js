@@ -1,16 +1,21 @@
+import get from 'lodash/fp/getOr'
 import { connect } from 'react-redux'
-import get from 'lodash.get'
+import { addReminder, editReminder } from '../redux/actions'
 
 const mapStateToProps = (state, { date }) => {
   const year = date.getFullYear()
   const month = date.getMonth()
   const day = date.getDate()
   return {
-    events: get(state, `events.${year}.${month}.${day}`, [])
+    outOfMonth: month !== state.month.getMonth(),
+    reminders: get([], `reminders.${year}.${month}.${day}`, state)
   }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  addReminder,
+  editReminder
+}
 
 export default connect(
   mapStateToProps,

@@ -1,6 +1,6 @@
-import { localizedWeekDays, makeCalendarRows } from '../src/util/dates'
+import { localizedWeekDays, makeCalendarRows } from './dates'
 
-const monts = {
+const months = {
   jan: 0,
   feb: 1,
   mar: 2,
@@ -16,6 +16,7 @@ const monts = {
 }
 
 describe('date utilities', () => {
+
   it('exports an array of week days', () => {
     expect(localizedWeekDays.length).toBe(7)
     expect(localizedWeekDays.every(item => typeof item === 'string')).toBe(true)

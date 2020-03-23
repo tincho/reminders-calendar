@@ -1,18 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
-
+import { isToday } from '../util/dates'
 import enhance from './DayContainer'
 
-const today = new Date()
-const isToday = date => 
-  date.getDate() === today.getDate()
-  && date.getMonth() === today.getMonth()
-  && date.getFullYear() === today.getFullYear()
+const Day = ({ date, outOfMonth, reminders, addReminder }) => {
 
-const Day = ({ date, outOfMonth, events }) => {
-
-  const showEvents = () => {
-    console.log(events)
+  const showReminders = () => {
+    console.log(reminders)
   }
 
   return <td 
@@ -21,7 +15,11 @@ const Day = ({ date, outOfMonth, events }) => {
       today: isToday(date)
     })}>
       <span className="number">{date.getDate()}</span>
-      {events.length ? <button onClick={showEvents}>{events.length}</button> : ''}
+      {reminders.length ? <button onClick={showReminders}>{reminders.length}</button> : ''}
+      <button onClick={() => {
+        const reminder = prompt('title?')
+        addReminder({ date, reminder })
+      }}>+</button>
   </td>
 }
 

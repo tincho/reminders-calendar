@@ -15,8 +15,7 @@ const Month = ({ year, month }) => {
       {row.map(day => 
         <Day
           key={day.getTime()}
-          date={day}
-          outOfMonth={day.getMonth() !== Number(month)} />
+          date={day} />
       )}
     </tr>)
 

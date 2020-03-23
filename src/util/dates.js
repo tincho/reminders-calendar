@@ -56,3 +56,9 @@ export const localizedWeekDays = (() => {
   )
   return result;
 })(); // iife
+
+const today = new Date()
+export const isToday = date => 
+  date.getDate() === today.getDate()
+  && date.getMonth() === today.getMonth()
+  && date.getFullYear() === today.getFullYear()
