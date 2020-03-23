@@ -73,3 +73,14 @@ tr:first-of-type .day {
   bottom: 1px;
   right: 1px;
 }
+.day .cleanReminders {
+  position: absolute;
+  bottom: 1px;
+  right: 30px;
+  background-color: red;
+}
+
+
+form.reminder label, form.reminder input {
+  display: block;
+}

@@ -1,5 +1,6 @@
 import get from 'lodash/fp/getOr'
 import { connect } from 'react-redux'
+import { cleanReminders } from '@/redux/actions'
 
 const mapStateToProps = (state, { date }) => {
   const year = date.getFullYear()
@@ -23,6 +24,6 @@ const mapStateToProps = (state, { date }) => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { cleanReminders }
 )
 

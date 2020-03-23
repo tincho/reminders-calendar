@@ -4,8 +4,8 @@ export const PREV_MONTH = 'calendar/PREV_MONTH'
 export const NEXT_MONTH = 'calendar/NEXT_MONTH'
 export const ADD_REMINDER = 'calendar/ADD_REMINDER'
 export const EDIT_REMINDER = 'calendar/EDIT_REMINDER'
+export const DELETE_REMINDER = 'calendar/EDIT_REMINDER'
 export const CLEAN_REMINDERS = 'calendar/CLEAN_REMINDERS'
-
 
 export const prevMonth = currentMonth => {
   const month = new Date(currentMonth)
@@ -49,9 +49,34 @@ export const editReminder = ({ reminder }) => {
   const month = new Date(date).getMonth()
   const day = new Date(date).getDate()
 
+  if (reminder.time && !/:/g.test(reminder.time)) {
+    reminder.time = reminder.time + ':00'
+  }
+
   return {
     type: EDIT_REMINDER,
     dayPath: `reminders.${year}.${month}.${day}`,
     reminder
+  }
+}
+
+export const deleteReminder = ({ date, id }) => {
+  const year = new Date(date).getFullYear()
+  const month = new Date(date).getMonth()
+  const day = new Date(date).getDate()
+  return {
+    type: DELETE_REMINDER,
+    dayPath: `reminders.${year}.${month}.${day}`,
+    id
+  }
+}
+
+export const cleanReminders = date => {
+  const year = new Date(date).getFullYear()
+  const month = new Date(date).getMonth()
+  const day = new Date(date).getDate()
+  return {
+    type: CLEAN_REMINDERS,
+    dayPath: `reminders.${year}.${month}.${day}`
   }
 }

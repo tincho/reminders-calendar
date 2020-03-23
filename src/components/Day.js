@@ -7,7 +7,7 @@ import Reminder from '@/components/Reminder'
 import EditReminder from '@/components/EditReminder'
 import enhance from './DayContainer'
 
-const Day = ({ date, outOfMonth, reminders }) => {
+const Day = ({ date, outOfMonth, reminders, cleanReminders }) => {
 
   const [open, setOpen] = React.useState(false)
   const openModal = () => setOpen(true)
@@ -20,7 +20,8 @@ const Day = ({ date, outOfMonth, reminders }) => {
     })}>
       <span className="number">{date.getDate()}</span>
       {reminders.map(reminder => <EditReminder reminder={reminder} key={reminder.id} />)}
-      <button className="addReminder" onClick={openModal}>+</button>
+      <button title="Add Reminder" className="addReminder" onClick={openModal}>+</button>
+      {reminders.length > 1 && <button title="Remove ALL" className="cleanReminders" onClick={() => cleanReminders(date)}>&times;</button>}
       <Modal
         isOpen={open}
         onRequestClose={closeModal}
