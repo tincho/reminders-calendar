@@ -2,6 +2,7 @@
   "name": "jobsity-calendar",
   "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
