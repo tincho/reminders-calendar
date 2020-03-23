@@ -28,6 +28,10 @@ export const addReminder = ({ date = new Date(), reminder }) => {
     text: reminder
   } : reminder
 
+  if (reminderObj.time && !/:/g.test(reminderObj.time)) {
+    reminderObj.time = reminderObj.time + ':00'
+  }
+
   return {
     type: ADD_REMINDER,
     dayPath: `reminders.${year}.${month}.${day}`,
