@@ -1,12 +1,13 @@
 import store from './store'
-import { ADD_REMINDER, addReminder } from './actions'
+import { ADD_REMINDER, addReminder, editReminder, EDIT_REMINDER } from './actions'
 
 describe('actions creators and reducers', () => {
   it('addReminder', done => {
     const action1 = addReminder({
       date: new Date('2021-08-14T00:00'),
       reminder: {
-        text: 'celebrate covid19 survival'
+        text: 'celebrate covid19 survival',
+        city: 'San Francisco'
       }
     })
 
@@ -16,6 +17,8 @@ describe('actions creators and reducers', () => {
     store.subscribe(() => {
       const thatDayReminders = store.getState().reminders['2021']['7']['14']
       if (thatDayReminders.length !== 2) return
+
+      
       expect(thatDayReminders.some(rem => rem.id === action1.reminder.id)).toBe(true)
       done()
     })
@@ -23,10 +26,33 @@ describe('actions creators and reducers', () => {
     const action2 = addReminder({
       date: new Date('2021-08-14T00:00'),
       reminder: {
-        text: 'wash my hands'
+        text: 'wash my hands',
+        city: 'Los Angeles'
       }
     })
     store.dispatch(action1)
     store.dispatch(action2)
+  })
+
+  it('editReminder', done => {
+    // warning: destruct operator abusive usage x)
+    const { reminders: { 2021: { 7: { 14: [rem] } } } } = store.getState()
+    const action = editReminder({
+      reminder: {
+        ...rem,
+        city: 'Porto Alegre'
+      }
+    })
+
+    expect(action.type).toBe(EDIT_REMINDER)
+    expect(action.dayPath).toBe('reminders.2021.7.14')
+    expect(action.reminder.city).toBe('Porto Alegre')
+
+    store.subscribe(() => {
+      const { reminders: { 2021: { 7: { 14: [editedReminder] } } } } = store.getState()
+      expect(editedReminder.city).toBe('Porto Alegre')
+      done()
+    })
+    store.dispatch(action)
   })
 })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { prevMonth, nextMonth } from '../redux/actions'
-import Month from './Month'
+import { prevMonth, nextMonth } from '@/redux/actions'
+import Month from '@/components/Month'
 
 const Calendar = ({ month, nextMonth, prevMonth }) => {
   const year = month.getFullYear()

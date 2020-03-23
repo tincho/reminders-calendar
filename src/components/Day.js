@@ -1,12 +1,21 @@
 import React from 'react'
 import classnames from 'classnames'
-import { isToday } from '../util/dates'
+import { isToday } from '@/util/dates'
+import Reminder from '@/components/Reminder'
 import enhance from './DayContainer'
 
-const Day = ({ date, outOfMonth, reminders, addReminder }) => {
+const Day = ({ date, outOfMonth, reminders }) => {
 
-  const showReminders = () => {
-    console.log(reminders)
+  const [open, setOpen] = React.useState(false)
+  const openModal = () => setOpen(true)
+  const closeModal = () => setOpen(false)
+
+  const showReminder = reminder => {
+    openModal()
+  }
+
+  const addReminder = () => {
+    openModal()
   }
 
   return <td 
@@ -15,11 +24,20 @@ const Day = ({ date, outOfMonth, reminders, addReminder }) => {
       today: isToday(date)
     })}>
       <span className="number">{date.getDate()}</span>
-      {reminders.length ? <button onClick={showReminders}>{reminders.length}</button> : ''}
-      <button onClick={() => {
-        const reminder = prompt('title?')
-        addReminder({ date, reminder })
-      }}>+</button>
+      {reminders.map(reminder => (
+        <>
+        <button
+          style={{ backgroundColor: reminder.color }}
+          key={reminder.id}
+          onClick={() => showReminder(reminder)}>
+            *
+          </button>
+          {open && <Reminder reminder={reminder} />}
+        </>
+        )
+      )}
+      <button className="addReminder" onClick={addReminder}>+</button>
+      {open && <Reminder reminder={{ date: date.toISOString() }} />}
   </td>
 }
 

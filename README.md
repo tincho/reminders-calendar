@@ -24,3 +24,4 @@ with the lines of the below illustration:
 
 `npm run build`
 
+Then, serve statically the created `build` directory from any webserver

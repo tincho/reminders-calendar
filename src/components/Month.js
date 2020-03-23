@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { localizedWeekDays, makeCalendarRows } from '../util/dates'
+import { localizedWeekDays, makeCalendarRows } from '@/util/dates'
 
-import Day from './Day'
+import Day from '@/components/Day'
 
 const Month = ({ year, month }) => {
   const dayNames = localizedWeekDays.map(dayName => (

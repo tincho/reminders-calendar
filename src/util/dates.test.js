@@ -24,7 +24,7 @@ describe('date utilities', () => {
 
   describe('calendar week rows', () => {
 
-    it('february 2020 starts on a saturday but ends on saturday', () => {
+    it('february 2020 starts on a saturday but ends on saturday - show 5 rows', () => {
       const weeks = makeCalendarRows(2020, months.feb)
 
       // first showing day: january 26th
@@ -42,7 +42,7 @@ describe('date utilities', () => {
     })
 
 
-    it('march 2020 starts on a sunday but ends on tuesday', () => {
+    it('march 2020 starts on a sunday but ends on tuesday - show 5 rows', () => {
       const weeks = makeCalendarRows(2020, months.mar)
 
       // first showing day: march 1st
@@ -61,7 +61,7 @@ describe('date utilities', () => {
 
 
 
-    it('may 2020 starts on a saturday but ends on saturday', () => {
+    it('may 2020 starts on a saturday but ends on saturday - show 6 rows', () => {
       const weeks = makeCalendarRows(2020, months.may)
 
       // first showing day: april 26th

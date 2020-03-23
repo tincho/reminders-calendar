@@ -20,9 +20,9 @@ export const nextMonth = currentMonth => {
 }
 
 export const addReminder = ({ date = new Date(), reminder }) => {
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDate()
+  const year = new Date(date).getFullYear()
+  const month = new Date(date).getMonth()
+  const day = new Date(date).getDate()
 
   const reminderObj = typeof reminder !== 'object' ? {
     text: reminder
@@ -33,13 +33,21 @@ export const addReminder = ({ date = new Date(), reminder }) => {
     dayPath: `reminders.${year}.${month}.${day}`,
     reminder: {
       id: uniqueId(),
+      date: new Date(date).toISOString(),
       ...reminderObj
     }
   }
 }
 
-export const editReminder = () => {
+export const editReminder = ({ reminder }) => {
+  const { date } = reminder
+  const year = new Date(date).getFullYear()
+  const month = new Date(date).getMonth()
+  const day = new Date(date).getDate()
+
   return {
-    type: EDIT_REMINDER
+    type: EDIT_REMINDER,
+    dayPath: `reminders.${year}.${month}.${day}`,
+    reminder
   }
 }
