@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
-import get from 'lodash.get'
+
+import enhance from './DayContainer'
 
 const today = new Date()
 const isToday = date => 
@@ -25,18 +25,4 @@ const Day = ({ date, outOfMonth, events }) => {
   </td>
 }
 
-const mapStateToProps = (state, { date }) => {
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDate()
-  return {
-    events: get(state, `events.${year}.${month}.${day}`, [])
-  }
-}
-
-const mapDispatchToProps = {}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Day)
+export default enhance(Day)

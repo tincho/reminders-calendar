@@ -42,14 +42,14 @@ tr:first-of-type .day {
   border-right: 1px solid gray;
   border-bottom: 1px solid gray;
   height: 15vh;
+  padding: 3px 5px;
 }
 
 .day .number {
   display: block;
   text-align: right;
   width: 2vw;
-  padding: 3px;
-  margin-top: 5px;
+  margin-bottom: 3px;
 }
 
 .day.today {

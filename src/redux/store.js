@@ -1,8 +1,9 @@
 import { createStore } from 'redux'
 
-const rootReducer = state => state
+import rootReducer from './calendarReducer'
 
 const initialState = {
+  month: new Date(),
   events: {
     2020: {
       2: {
@@ -13,7 +14,8 @@ const initialState = {
             code: 'MDQ',
             name: 'Mar del Plata',
             latLng: []
-          }
+          },
+          color: '#0f0f0f'
         }]
       }
     }

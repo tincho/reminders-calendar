@@ -1,34 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { prevMonth, nextMonth } from '../redux/actions'
 import Month from './Month'
 
-const Calendar = () => {
-  const [month, setMonth] = useState(new Date())
-  const prevMonth = () => {
-    const newMonth = new Date(month)
-    newMonth.setMonth(month.getMonth() - 1)
-    setMonth(newMonth)
-  }
-  const nextMonth = () => {
-    const newMonth = new Date(month)
-    newMonth.setMonth(month.getMonth() + 1)
-    setMonth(newMonth)
-  }
+const Calendar = ({ month, nextMonth, prevMonth }) => {
+  const year = month.getFullYear()
+  const monthNumber = month.getMonth()
+  const monthName = month.toLocaleDateString('es', { month: 'long' })
 
-    const year = month.getFullYear()
-    const monthNumber = month.getMonth()
-    const monthName = month.toLocaleDateString('es', { month: 'long' })
+  const title = <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+    <button onClick={() => prevMonth(month)}>Prev</button>
+    <span style={{textTransform: 'capitalize' }}>{`${monthName} ${year}`}</span>
+    <button onClick={() => nextMonth(month)}>Next</button>
+  </div>
 
-    const title = <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-      <button onClick={prevMonth}>Prev</button>
-      <span style={{textTransform: 'capitalize' }}>{`${monthName} ${year}`}</span>
-      <button onClick={nextMonth}>Next</button>
+  return (
+    <div id="container">
+      {title}
+      <Month year={year} month={monthNumber} />
     </div>
-    return (
-      <div id="container">
-        {title}
-        <Month year={year} month={monthNumber} />
-      </div>
-    );
+  );
 }
 
-export default Calendar
+const mapStateToProps = state => ({
+  month: state.month
+})
+
+export default connect(
+  mapStateToProps,
+  {
+    prevMonth,
+    nextMonth
+  }
+)(Calendar)
