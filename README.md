@@ -11,7 +11,7 @@ with the lines of the below illustration:
 * Create/Edit/Remove reminders
 * Remove all reminders from a given date
 * Browse between months
-* Fake weather API because none of the freely available was suitable
+* Weather forecst via WeatherBit API
 
 ## Instructions
 

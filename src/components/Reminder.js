@@ -47,6 +47,7 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
     })
   }, [editing, daysDistance, weather, reminder.date, reminder.city])
 
+  const timeRegex = '^([0-9]{1,2})(:([0-9]{2}))?$'
   const validate = () => {
     const err = []
     try {
@@ -54,8 +55,7 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
         err.push('Invalid text')
       }
       if (newReminder.time && newReminder.time.length) {
-        const timeRegex = /^([0-9]{1,2})(:([0-9]{2}))?$/
-        const match = timeRegex.exec(newReminder.time)
+        const match = new RegExp(timeRegex).exec(newReminder.time)
         if (!match 
             || Number(match[1]) < 1
             || Number(match[1]) > 23 
@@ -115,20 +115,40 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
       {errors.map((err,i) => <p key={i} style={{color: 'red'}}>{err}</p>)}
       <label htmlFor={`#${idPrefix}-text`}>
         Text:
-        <input autoComplete={false} autoFocus id={`${idPrefix}-text`} type="text" value={newReminder.text || ''} onChange={setReminderValue('text')} />
+        <input
+          autoComplete="off"
+          autoFocus
+          maxlength="30"
+          id={`${idPrefix}-text`}
+          type="text"
+          value={newReminder.text || ''}
+          onChange={setReminderValue('text')} />
       </label>
       <label htmlFor={`#${idPrefix}-time`}>
         Time: 
         <br/><small style={{color: 'gray'}}>(format <code>HH:MM</code>)</small>
-        <input id={`${idPrefix}-time`} type="text" value={newReminder.time || ''} onChange={setReminderValue('time')} />
+        <input
+          id={`${idPrefix}-time`}
+          pattern={timeRegex}
+          autoComplete="off"
+          maxlength="5"
+          type="text"
+          value={newReminder.time || ''}
+          onChange={setReminderValue('time')} />
       </label>
       <label htmlFor={`#${idPrefix}-city`}>
         City:
-        <input id={`${idPrefix}-city`} type="text" value={newReminder.city || ''} onChange={setReminderValue('city')} />
+        <input
+          id={`${idPrefix}-city`}
+          type="text"
+          value={newReminder.city || ''}
+          onChange={setReminderValue('city')} />
       </label>
       <label htmlFor={`#${idPrefix}-color`}>
         Color:
-        <SelectColor current={newReminder.color} onSelect={color => setNewReminder({...newReminder, color})} />
+        <SelectColor
+          current={newReminder.color}
+          onSelect={color => setNewReminder({...newReminder, color})} />
       </label>
 
       <button type="submit">Save</button>

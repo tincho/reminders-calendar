@@ -103,3 +103,8 @@ form.reminder .weather {
 form.reminder .weather.loaded {
   border: 1px solid gray;
 }
+
+button[type="submit"] {
+  background-color: var(--blue);
+  color: white;
+}
