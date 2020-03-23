@@ -6,6 +6,13 @@ with the lines of the below illustration:
 
 ![Calendar Image Demo](/calendar.png)
 
+## Features
+
+* Create/Edit/Remove reminders
+* Remove all reminders from a given date
+* Browse between months
+* Fake weather API because none of the freely available was suitable
+
 ## Instructions
 
 * Clone this repo
