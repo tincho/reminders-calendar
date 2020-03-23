@@ -28,7 +28,7 @@ const Day = ({ date, outOfMonth, reminders }) => {
         <header>
           <button onClick={closeModal}>&times;</button>
         </header>
-        <Reminder reminder={{ date: new Date() }} onSave={closeModal} />
+        <Reminder reminder={{ date: new Date(date) }} onSave={closeModal} />
       </Modal>
   </td>
 }
