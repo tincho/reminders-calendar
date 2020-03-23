@@ -31,7 +31,8 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
   })
 
   React.useEffect(() => {
-    textRef.current.focus()
+    if (document.activeElement.tagName !== 'INPUT')
+      textRef.current.focus()
   })
 
   const validate = () => {
@@ -41,9 +42,9 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
         err.push('Invalid text')
       }
       if (newReminder.time && newReminder.time.length) {
-        const timeRegex = /([0-9]{1,2})(?:\:([0-9]{2}))?/
+        const timeRegex = /^([0-9]{1,2})(:([0-9]{2}))?$/
         const match = timeRegex.exec(newReminder.time)
-        if (!match || Number(match[1]) > 23 || Number(match[2]) > 59) {
+        if (!match || Number(match[1]) > 23 || Number(match[3]) > 59) {
           err.push('Invalid time')
         }
       }

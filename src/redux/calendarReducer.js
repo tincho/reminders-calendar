@@ -32,10 +32,7 @@ const byAction = {
     const day = get([], dayPath, state)
     return set(Object, dayPath, day.filter(item => item.id !== id), state)
   },
-  [CLEAN_REMINDERS]: (state, { dayPath }) => {
-    const day = get([], dayPath, state)
-    return set(Object, dayPath, [], state)
-  }
+  [CLEAN_REMINDERS]: (state, { dayPath }) => set(Object, dayPath, [], state)
 }
 
 

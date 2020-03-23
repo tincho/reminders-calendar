@@ -9,12 +9,11 @@ const SelectColor = ({ current, onSelect }) => {
     '#EFB292'
   ]
   const [selected, setSelected] = React.useState(current || palette[0])
-  React.useEffect(() => {
-    onSelect(selected)
-  }, [])
+
   return palette.map(color => (
-    <a 
-      key={color} 
+    <button
+      key={color}
+      type="button"
       style={{
         display: 'inline-block',
         width: 20,
@@ -28,7 +27,7 @@ const SelectColor = ({ current, onSelect }) => {
         onSelect(color)
       }}>
       &nbsp;
-    </a>
+    </button>
     )
   )
 }
