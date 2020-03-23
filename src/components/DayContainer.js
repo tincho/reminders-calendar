@@ -9,15 +9,17 @@ const mapStateToProps = (state, { date }) => {
   return {
     outOfMonth: month !== state.month.getMonth(),
     reminders: get([], `reminders.${year}.${month}.${day}`, state).sort((a, b) => {
-      if (!a.time) {
-        return !b.time ? 0 : 1
+      const noA = !a.time || a.time === ''
+      const noB = !b.time || b.time === ''
+      if (noA) {
+        return noB ? 0 : 1
       }
-      if (!b.time) {
+      if (noB) {
         return -1
       }
-      const aStamp = new Date(`1970-01-01T${a.time}Z`).getTime()
-      const bStamp = new Date(`1970-01-01T${b.time}Z`).getTime()
-      return aStamp - bStamp
+      const aDate = new Date(`1970-01-01T${a.time}Z`)
+      const bDate = new Date(`1970-01-01T${b.time}Z`)
+      return aDate.getTime() - bDate.getTime()
     })
   }
 }

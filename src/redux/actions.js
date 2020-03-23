@@ -1,3 +1,4 @@
+import { formatTime } from '@/util/dates'
 const uniqueId = () => Math.random().toString(36).substr(2, 9)
 
 export const PREV_MONTH = 'calendar/PREV_MONTH'
@@ -24,15 +25,11 @@ export const addReminder = ({ date = new Date(), reminder }) => {
   const month = new Date(date).getMonth()
   const day = new Date(date).getDate()
 
-  const reminderObj = typeof reminder !== 'object' ? {
-    text: reminder
-  } : reminder
-
-  if (reminderObj.time && !/:/g.test(reminderObj.time)) {
-    reminderObj.time = reminderObj.time + ':00'
+  if (reminder.time && reminder.time.length) {
+    reminder.time = formatTime(reminder.time)
   }
 
-  reminderObj.text = reminderObj.text.slice(0, 30)
+  reminder.text = reminder.text.slice(0, 30)
 
   return {
     type: ADD_REMINDER,
@@ -40,7 +37,7 @@ export const addReminder = ({ date = new Date(), reminder }) => {
     reminder: {
       id: uniqueId(),
       date: new Date(date).toISOString(),
-      ...reminderObj
+      ...reminder
     }
   }
 }
@@ -51,10 +48,9 @@ export const editReminder = ({ reminder }) => {
   const month = new Date(date).getMonth()
   const day = new Date(date).getDate()
 
-  if (reminder.time && !/:/g.test(reminder.time)) {
-    reminder.time = reminder.time + ':00'
+  if (reminder.time && reminder.time.length) {
+    reminder.time = formatTime(reminder.time)
   }
-
   reminder.text = reminder.text.slice(0, 30)
 
   return {

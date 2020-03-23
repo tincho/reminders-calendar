@@ -57,7 +57,6 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
       if (newReminder.time && newReminder.time.length) {
         const match = new RegExp(timeRegex).exec(newReminder.time)
         if (!match 
-            || Number(match[1]) < 1
             || Number(match[1]) > 23 
             || Number(match[3]) > 59) {
           err.push('Invalid time')
@@ -118,7 +117,7 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
         <input
           autoComplete="off"
           autoFocus
-          maxlength="30"
+          maxLength="30"
           id={`${idPrefix}-text`}
           type="text"
           value={newReminder.text || ''}
@@ -131,7 +130,7 @@ const Reminder = ({ reminder, addReminder, editReminder, onSave = noop }) => {
           id={`${idPrefix}-time`}
           pattern={timeRegex}
           autoComplete="off"
-          maxlength="5"
+          maxLength="5"
           type="text"
           value={newReminder.time || ''}
           onChange={setReminderValue('time')} />

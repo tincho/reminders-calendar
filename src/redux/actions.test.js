@@ -72,4 +72,24 @@ describe('actions creators and reducers', () => {
     })
     expect(edit.reminder.text).toBe('confinement, day 6: ran out of')
   })
+
+  it('empty time', () => {
+    const add = addReminder({
+      date: new Date(),
+      reminder: {
+        text: 'be present',
+        time: ''
+      }
+    })
+    const edit = editReminder({
+      reminder: {
+        date: new Date(),
+        text: 'be mindful',
+        time: ''
+      }
+    })
+
+    expect(add.reminder.time).toBe('')
+    expect(edit.reminder.time).toBe('')
+  })
 })

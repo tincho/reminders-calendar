@@ -1,4 +1,4 @@
-import { localizedWeekDays, makeCalendarRows } from './dates'
+import { localizedWeekDays, makeCalendarRows, formatTime } from './dates'
 
 const months = {
   jan: 0,
@@ -20,6 +20,21 @@ describe('date utilities', () => {
   it('exports an array of week days', () => {
     expect(localizedWeekDays.length).toBe(7)
     expect(localizedWeekDays.every(item => typeof item === 'string')).toBe(true)
+  })
+
+  describe('formatTime', () => {
+    it('pads 0 to hour', () => {
+      expect(formatTime('1:14')).toBe('01:14')
+    })
+    it('pads 0 to minute', () => {
+      expect(formatTime('01:1')).toBe('01:01')
+    })
+    it('pads 0 to minute', () => {
+      expect(formatTime('01:1')).toBe('01:01')
+    })
+    it('adds minutes', () => {
+      expect(formatTime('1')).toBe('01:00')
+    })
   })
 
   describe('calendar week rows', () => {

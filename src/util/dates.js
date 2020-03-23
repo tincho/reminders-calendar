@@ -69,3 +69,13 @@ export const daysBetween = (date1, date2 = new Date()) => {
   date2.setHours(0, 0, 0, 0)
   return Math.ceil( (date1.getTime() - date2.getTime()) / oneDayMs )
 }
+
+export const formatTime = time => {
+  let output = time.slice(0)
+  if (!/:/g.test(time)) {
+    output = time + ':00'
+  }
+  const [hours = '', minutes = ''] = output.split(':')
+  output = [hours.padStart(2, '0'), minutes.padStart(2, '0')].join(':')
+  return output
+}
