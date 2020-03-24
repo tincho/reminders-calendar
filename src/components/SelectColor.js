@@ -10,6 +10,11 @@ const SelectColor = ({ current, onSelect }) => {
   ]
   const [selected, setSelected] = React.useState(current || palette[0])
 
+  React.useEffect(() => {
+    onSelect(selected)
+    // eslint-disable-next-line
+  }, [])
+
   return palette.map(color => (
     <button
       key={color}
